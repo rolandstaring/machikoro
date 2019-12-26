@@ -11,8 +11,6 @@ from PyQt5 import QtCore as qtc
 from PyQt5 import QtMultimedia as qtm
 
 
-
-
 class Global():
 	def __init__(self):
 		self.buy_fase = False
@@ -25,10 +23,6 @@ class Global():
 		
 	def set_buy_fase(self,bool):
 		self.buy_fase = bool
-
-
-
-
 		
 class TightListWidget(qtw.QListWidget):
 	def __init__(self):
@@ -168,7 +162,6 @@ class MyCardLabel(qtw.QLabel):
 		response = kaart_info.exec()
 		if response == qtw.QMessageBox.Abort: kaart_info.close()
 		
-
 class GameWidget(qtw.QWidget):
 	def __init__(self, players):
 		super().__init__(modal=True)
@@ -589,7 +582,6 @@ class GameWidget(qtw.QWidget):
 			glob.sounds['card'].play()
 			qtc.QTimer.singleShot(1*1000,self.switch_user)
 	
-		
 class PlayerWidget(qtw.QWidget):
 	buy_goalcard = qtc.pyqtSignal(str)
 
@@ -720,8 +712,7 @@ class PlayerWidget(qtw.QWidget):
 	
 	def __getitem__(self,position):
 		return	self.cards[position]
-			
-		
+				
 class BankWidget(qtw.QWidget):
 	buy_card = qtc.pyqtSignal(str)
 	
@@ -809,8 +800,6 @@ class BankWidget(qtw.QWidget):
 	
 	def whenClickedLabel(self,card):
 		self.buy_card.emit(card)
-		
-
 		
 class MainWindow(qtw.QMainWindow): # change to mainwindow
 	def __init__(self):

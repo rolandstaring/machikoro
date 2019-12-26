@@ -1,21 +1,5 @@
 import random
-import os
-import copy
-import numpy as np
-from datetime import datetime, timedelta, time
 
-
-class color:
-   PURPLE = '\033[95m'
-   CYAN = '\033[96m'
-   DARKCYAN = '\033[36m'
-   BLUE = '\033[94m'
-   GREEN = '\033[92m'
-   YELLOW = '\033[93m'
-   RED = '\033[91m'
-   BOLD = '\033[1m'
-   UNDERLINE = '\033[4m'
-   END = '\033[0m'
 		
 class Spel:
 	def __init__(self, namen_lijst):
@@ -29,10 +13,7 @@ class Spel:
 		self.deelStartkaartenSpelers()
 		self.winnaar = 'niemand'
 		self.transactions = []
-		
-	def arraySpel(self):
-		return np.asarray([['ronde',self.ronde]])
-	
+			
 	def winnaarSpel(self):
 		return self.winnaar
 		
@@ -41,8 +22,7 @@ class Spel:
 	
 	def aantalBeurten(self, speler_nr):
 		return self.spelers_l[speler_nr].aantalBeurten() 
-		
-		
+			
 	def plusRonde(self):
 		self.ronde += 1
 		
@@ -63,7 +43,6 @@ class Spel:
 	
 	def beurt(self):
 		self.beurtSpeler(0)
-
 	
 	def kaartnameninBudget(self, speler_nr):
 		spelkaarteninbudget_l =	 self.bank.spelkaarteninbudgetSpeler(self.spelers_l[speler_nr])
@@ -109,33 +88,7 @@ class Spel:
 			alle_transacties_l.append(regels.toonTransacties())
 		
 		return alle_transacties_l
-		
-		
-		
-	def dobbelen(self,speler_nr):
-		# Dobbelen
-		self.dubbelgooienBeurt == False
-		
-		## Als je een treinstation hebt mag je ervoor kiezen met 2 dobbelstenen te gooien
-		aantal_stenen_wens = 1
-		if self.spelers_l[speler_nr].aantalDobbelstenen() == 2:
-			aantal_stenen_wens = random.randrange(1,3,1)	
-			resultaat_l = self.spelers_l[speler_nr].gooiDobbelstenen(int(aantal_stenen_wens))	
-				
-		elif self.spelers_l[speler_nr].aantalDobbelstenen() == 1:
-			resultaat_l = self.spelers_l[speler_nr].gooiDobbelstenen(1)
 			
-		resultaat = sum(resultaat_l)		
-		#print 'Dobbel=', resultaat_l, ' Resultaat= ', resultaat
-		
-		## Nog een beurt als je met 2 dobbelstenen dubbel gooit
-		if len(resultaat_l) == 2 and resultaat_l[0] == resultaat_l[1] and self.spelers_l[speler_nr].dubbelGooi() == True:
-			self.dubbelgooienBeurt = True		
-		
-		return resultaat
-	
-			
-	
 	def printSpelkaarten(self, spelkaarten_l):
 		for spelkaart in spelkaarten_l:
 			spelkaart.printSpelkaart()
@@ -149,9 +102,6 @@ class Spel:
 	def printDoelkaarten(self, doelkaarten_l):
 		for doelkaart in doelkaarten_l:
 			doelkaart.printDoelkaart()
-	
-
-	
 				
 	def iemandGewonnen(self):
 		# heeft een van de spelers alle doelkaarten gehaald?
@@ -179,21 +129,6 @@ class Spel:
 	def namenSpelers(self):
 		return self.spelers_namen
 	
-	
-	def doelkaartenSpelers(self):
-		print(color.BOLD, 'Doelkaarten van alle spelers', color.END)
-		for s in range(len(self.spelers_namen)):
-			print(self.spelers_l[s].toonNaam(), 'doelkaarten \n', self.spelers_l[s].printDoelkaarten())
-	
-	def spelkaartenSpelers(self):
-		print(color.BOLD , 'Spelkaarten van alle spelers ',color.END)
-		for s in range(len(self.spelers_namen)):
-			print(self.spelers_l[s].toonNaam(), 'spelkaarten \n', self.spelers_l[s].printSpelkaarten())
-			
-	def muntenSpelers(self):
-		print(color.BOLD, 'Munten verdeling:', color.END)
-		for s in range(len(self.spelers_namen)):
-			print(self.spelers_l[s].toonNaam(), 'munten', self.spelers_l[s].aantalMunten())
 	
 	def koopSpelkaart(self, speler_nr, spelkaart_naam):
 		## als kaart beschikbaar en budget beschikbaar
@@ -353,9 +288,6 @@ class Regels:
 		spelkaarten_beurt_speler = self.beurt_speler.namenSpelkaarten()
 		if self.speler != self.beurt_speler and  'Stadion' in spelkaarten_beurt_speler and self.dobbel_resultaat == 6:
 			self.transactie(self.speler, self.beurt_speler, 2 , 'Stadion')
-	
-		
-###########################
 
 class Speler:
 	def __init__(self, naam,  doelkaarten_l, spelkaarten_l , munten = 3, aantal_dobbelstenen = 1, aantal_beurten = 1):
@@ -394,8 +326,7 @@ class Speler:
 			if doelkaart.doelkaartGehaald() == True:
 				vermogen += doelkaart.toonPrijs()	
 		
-		return vermogen
-		
+		return vermogen		
 		
 	def aantalKaarten(self):
 		return len(self.spelkaarten_l)
@@ -797,8 +728,6 @@ class Bank:
 	
 	def __repr__(self):
 		return '%s' % (self.voorraad_sk)
-		
-##################################
 
 class Kaart:
 
