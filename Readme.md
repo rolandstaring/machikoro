@@ -31,7 +31,7 @@ Usage
 You will need Python 3.6 or higher 
 You will need to install pyqt5 see for more information. I just did a 'pip install pyqt5' 
 
-Simply run with 'python mk_gui.py' on the command-line
+    Simply run with 'python mk_gui.py' on the command-line
 
 Commments
 =========
